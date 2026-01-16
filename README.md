@@ -17,7 +17,11 @@ log("food equals to", food);
 
 // [main.cpp::loop::16] food equals to arr[2][3] = {{apple, banana, tomato}, {paprika, onion, garlic}}
 ```
-
+Evaluates statements even when if logging is disabled because of log level set
+```cpp
+logger:setLogLevel(ESP_LOG_NONE);
+logi("success", f()); // f() is still called
+```
 Adds prefix with file/function name/line. 
 ```
 // 0 // no prefix
