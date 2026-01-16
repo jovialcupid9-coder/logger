@@ -56,18 +56,20 @@ In platformio.ini set : (works both with Arduino IDE and ESP - IDF) build_unflag
   }
 
   // helper needed because folding doesn't allow it (?? check if true)
-  template <typename T> void printArg(printableBuffer &buff, const T &arg)
+  template <typename T> 
+  void printArg(printableBuffer &buff, const T &arg)
   {
     buff.print(arg);
     buff.print(' ');
   }
 
-  // Placeholder for all recivers
+  // Lits of the non owning pointers to all receivers
   inline std::vector<Print *> printers;
 
   // Implementation of the printing function, calling it directly omits using prefix. Macro log expands to it, needed to unfold __FILE__,
   // __FUNCTION__, __LINE__ values
-  template <typename... Args> void log_imp(const Args &...args)
+  template <typename... Args> 
+  void log_imp(const Args &...args)
   {
     static printableBuffer buff(LOGGER_REVERSE_BUFFER_SIZE);
     static SemaphoreHandle_t printMutex = NULL;
@@ -88,15 +90,10 @@ In platformio.ini set : (works both with Arduino IDE and ESP - IDF) build_unflag
   /*  re-use of the system log level type, just because using another would be DRY, possible values
   typedef enum {
     ESP_LOG_NONE,   //!< No log output
-
     ESP_LOG_ERROR,  //!< Critical errors, software module can not recover on its own
-
     ESP_LOG_WARN,   //!< Error conditions from which recovery measures have been taken
-
     ESP_LOG_INFO,   //!< Information messages which describe normal flow of events
-
     ESP_LOG_DEBUG,  //!< Extra information which is not necessary for normal use  (values, pointers, sizes, etc).
-
     ESP_LOG_VERBOSE //!< Bigger chunks of debugging information, or frequent messages which can potentially flood the output.
   } */
 
@@ -137,20 +134,17 @@ In platformio.ini set : (works both with Arduino IDE and ESP - IDF) build_unflag
     }
   }
 
-  // Stores non owning pointers. Inline allows header-only usage without multiple definitions
-
   } // namespace detail
 
   /////////////////////////////////////////////////////////////////////////
   // PUBLIC API
   /////////////////////////////////////////////////////////////////////////
 
-  inline bool logInfo = true;
-
   /** @brief Remove arbitrary amount of Print objects (or pointers) from the internal list
    * @return false if asked for removal of non-existing one, true when all were removed
    */
-  template <typename... Ts> inline bool removePrinter(Ts && ...args)
+  template <typename... Ts> 
+  inline bool removePrinter(Ts && ...args)
   {
     // Fold with &&: each lambda returns true only if that argument was successfully removed
     return (true && ... && ([&] {
@@ -175,7 +169,8 @@ In platformio.ini set : (works both with Arduino IDE and ESP - IDF) build_unflag
    * @return true if **all printers were added, false if any were nullptr or duplicate
    * @details syntax: addPrinter(&Serial0)
    */
-  template <typename... Ts> inline bool addPrinter(Ts && ...args)
+  template <typename... Ts> 
+  inline bool addPrinter(Ts && ...args)
   {
     // Fold with &&: each lambda returns true only if the argument was newly added
     return (true && ... && ([&] {
