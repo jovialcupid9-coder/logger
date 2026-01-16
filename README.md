@@ -1,6 +1,14 @@
 # logger
 Modern esp32 print implementation. 
 
+
+ Library should be compiled with C++17 or newer.
+```ini
+;platformio.ino
+build_unflags = -std = gnu++ 11 
+build_flags = -std = gnu++ 2
+```
+
 Accepts arbitrary amount of args of any Printable type(mixed with one another), multidimensional arrays, correctly handles bool types, 
 
 ```cpp
@@ -22,8 +30,8 @@ Call #define LOGGER_USE_PREFIX == x before including library
 
  Thread safe, data is put into buffer that grows in need, recommended to keep default buffer to prevent fragmentantion caused constant reallocation. 
 ```cpp
-Call #define LOGGER_USE_PREFIX == x before including library, to change default 1024
- // #define LOGGER_REVERSE_BUFFER_SIZE 200 // d
+// Call #define LOGGER_USE_PREFIX == x before including library, to change default 1024
+  #define LOGGER_REVERSE_BUFFER_SIZE 200
 ```
 
  Part of esp_logs of things on lower level can be rerouted to logger, that enables reading them in webserial, etc
