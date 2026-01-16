@@ -20,17 +20,19 @@ Adds prefix with file/function name/line.
 Call #define LOGGER_USE_PREFIX == x before including library
 ```
 
- Thread safe, data is put into buffer that grows in need, recommended to keep default buffer to prevent fragmentantion caused constant reallocation
+ Thread safe, data is put into buffer that grows in need, recommended to keep default buffer to prevent fragmentantion caused constant reallocation. 
 ```cpp
- // #define LOGGER_REVERSE_BUFFER_SIZE 200 // default 1024
+Call #define LOGGER_USE_PREFIX == x before including library, to change default 1024
+ // #define LOGGER_REVERSE_BUFFER_SIZE 200 // d
 ```
 
  Part of esp_logs of things on lower level can be rerouted to logger, that enables reading them in webserial, etc
- ```cpp logger:reroute_og_logs();```
-
+ ```cpp
+ logger:reroute_og_logs();
+```
 
 // Supports log levels, reused system one esp_log_level_t, default is ESP_LOG_INFO
-```
+```cpp
 typedef enum {
     ESP_LOG_NONE,       /*! = 0 < No log output */
     ESP_LOG_ERROR,      /*! = 1< Critical errors, software module can not recover on its own */
@@ -41,5 +43,6 @@ typedef enum {
 } esp_log_level_t;
 ```
 
+Doesn't support c-string char arrays, otherwise most text will be formatted as array
 
 
