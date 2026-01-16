@@ -2,11 +2,13 @@
 Modern esp32 print implementation. 
 
 Accepts arbitrary amount of args of any Printable type(mixed with one another) + multidimensional arrays. 
-//
-  String food[ 2 ][ 3 ] = { {"apple", "banana", "tomato"}, {"paprika", "onion", "garlic"} };
-  log("food equals to", food);
-  // result: 
-  // [main.cpp::loop::16] food equals to arr[2][3] = {{apple, banana, tomato}, {paprika, onion, garlic}}
+
+
+String food[ 2 ][ 3 ] = { {"apple", "banana", "tomato"}, {"paprika", "onion", "garlic"} };
+log("food equals to", food);
+
+// [main.cpp::loop::16] food equals to arr[2][3] = {{apple, banana, tomato}, {paprika, onion, garlic}}
+
 
 Adds prefix with file/function name/line. 
 // 0 // no prefix
@@ -15,6 +17,7 @@ Adds prefix with file/function name/line.
 // 3 = [fileName.ext::line]
 // 4 = [fileName.ext::funcName]
 Call #define LOGGER_USE_PREFIX == x before including library
+
 
 // Supports log levels, reused system one esp_log_level_t, defaults at ESP_LOG_INFO
 typedef enum {
