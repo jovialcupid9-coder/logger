@@ -2,6 +2,7 @@
 Modern esp32 print implementation. 
 
 Accepts arbitrary amount of args of any Printable type(mixed with one another) + multidimensional arrays. 
+//
   String food[ 2 ][ 3 ] = { {"apple", "banana", "tomato"}, {"paprika", "onion", "garlic"} };
   log("food equals to", food);
   // result: 
