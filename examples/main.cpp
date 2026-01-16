@@ -3,9 +3,10 @@
 
 void setup() {
   Serial.begin(115200);
-  logger::addPrinter(&Serial);
+  logger::addPrinter(Serial, &Serial1); //Add arbitrary amount of Print objects (or pointers) to the list. 
 
   // mix any type that is printable
+  // only non supported type is c-string char arrays, otherwise most of the text will be printed this way
   const char* text = "hello";
   log(text, "world", String("..."), int(3), float(3.14));
   //  hello world ... 3 3.14
